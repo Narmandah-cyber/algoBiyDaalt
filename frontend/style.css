@@ -1,0 +1,54 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#controls {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  width: 240px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+#controls h3 {
+  margin-top: 0;
+  font-size: 16px;
+  text-align: center;
+  color: #b8d4ff;
+}
+
+select, button {
+  width: 100%;
+  margin-top: 6px;
+  padding: 6px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+button {
+  background-color: #5c85ff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #476ce4;
+}

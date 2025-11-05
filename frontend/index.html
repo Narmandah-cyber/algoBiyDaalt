@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>UB Shortest Path Finder</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="controls">
+    <h3>Ulaanbaatar Route Finder</h3>
+    <label>Algorithm:</label>
+    <select id="algorithm">
+      <option value="bfs">BFS (Fewest Steps)</option>
+      <option value="dfs">DFS (All Possible Paths)</option>
+      <option value="dijkstra">Dijkstra (Shortest Distance)</option>
+    </select>
+    <button id="clear">Clear</button>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
