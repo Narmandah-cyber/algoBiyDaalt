@@ -1,5 +1,5 @@
 import heapq
-from backend.utils.geo_utils import haversine
+from utils.geo_utils import haversine
 
 def dijkstra(graph, start, goal):
     pq = [(0, start, [start])]

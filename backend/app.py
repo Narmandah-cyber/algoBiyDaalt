@@ -2,11 +2,11 @@ from flask import Flask, request, jsonify
 import tracemalloc, time
 from flask_cors import CORS 
 
-from backend.graph_builder import build_graph
-from backend.utils.geo_utils import find_nearest_node
-from backend.algorithms.bfs import bfs_path
-from backend.algorithms.dfs import dfs_path
-from backend.algorithms.dijkstra import dijkstra
+from graph_builder import build_graph
+from utils.geo_utils import find_nearest_node
+from algorithms.bfs import bfs_path
+from algorithms.dfs import dfs_path
+from algorithms.dijkstra import dijkstra
 
 app = Flask(__name__)
 CORS(app)  
