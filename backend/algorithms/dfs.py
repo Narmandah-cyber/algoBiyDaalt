@@ -8,7 +8,7 @@ def dfs_path(graph, start, goal, visited=None, path=None):
     if start == goal:
         return path
 
-    for neighbor in graph[start]:
+    for neighbor in [n if isinstance(n, tuple) else n[0] for n in graph[start]]:
         if neighbor not in visited:
             new_path = dfs_path(graph, neighbor, goal, visited, path + [neighbor])
             if new_path:

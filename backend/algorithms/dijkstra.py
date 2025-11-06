@@ -1,20 +1,24 @@
 import heapq
-from utils.geo_utils import haversine
 
 def dijkstra(graph, start, goal):
+    """
+    Weighted Dijkstra algorithm for realistic shortest path.
+    Graph edges are in the form: node -> [(neighbor, weight), ...]
+    """
     pq = [(0, start, [start])]
     visited = set()
 
     while pq:
-        dist, node, path = heapq.heappop(pq)
+        total_weight, node, path = heapq.heappop(pq)
         if node == goal:
             return path
+
         if node in visited:
             continue
         visited.add(node)
 
-        for neighbor in graph[node]:
+        for neighbor, weight in graph[node]:
             if neighbor not in visited:
-                new_dist = dist + haversine(node, neighbor)
-                heapq.heappush(pq, (new_dist, neighbor, path + [neighbor]))
+                heapq.heappush(pq, (total_weight + weight, neighbor, path + [neighbor]))
+
     return []
