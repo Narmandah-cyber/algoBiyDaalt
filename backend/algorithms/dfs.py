@@ -1,16 +1,27 @@
-def dfs_path(graph, start, goal, visited=None, path=None):
-    if visited is None:
-        visited = set()
-    if path is None:
-        path = [start]
+from typing import List, Tuple, Dict
 
-    visited.add(start)
+Node = Tuple[float, float]
+Graph = Dict[Node, List[Tuple[Node, float]]]
+
+
+def dfs_path(graph: Graph, start: Node, goal: Node) -> List[Node]:
+
     if start == goal:
-        return path
+        return [start]
 
-    for neighbor in [n if isinstance(n, tuple) else n[0] for n in graph[start]]:
-        if neighbor not in visited:
-            new_path = dfs_path(graph, neighbor, goal, visited, path + [neighbor])
-            if new_path:
-                return new_path
+    visited = {start}
+    stack: List[Tuple[Node, List[Node]]] = [(start, [start])]
+
+    while stack:
+        node, path = stack.pop()
+
+        for neighbour, _ in graph.get(node, []):
+            if neighbour in visited:
+                continue
+            if neighbour == goal:
+                return path + [neighbour]
+
+            visited.add(neighbour)
+            stack.append((neighbour, path + [neighbour]))
+
     return []
