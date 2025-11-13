@@ -1,4 +1,5 @@
 import math
+from scipy.spatial import KDTree
 
 def haversine(a, b):
     lon1, lat1 = a
@@ -8,5 +9,11 @@ def haversine(a, b):
     h = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlon/2)**2
     return 2 * R * math.asin(math.sqrt(h))
 
-def find_nearest_node(coord, nodes):
-    return min(nodes, key=lambda n: haversine(coord, n))
+class NodeLocator:
+    def __init__(self, nodes):
+        self.nodes = nodes
+        self.tree = KDTree(nodes)
+
+    def find_nearest(self, coord):
+        _, idx = self.tree.query(coord)
+        return self.nodes[idx]
