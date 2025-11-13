@@ -44,10 +44,16 @@ def route():
 
         if algo == "bfs":
             path = bfs_path(graph, start_node, end_node)
+            complexity_time = "O(V + E)"
+            complexity_space = "O(V)"
         elif algo == "dfs":
             path = dfs_path(graph, start_node, end_node)
+            complexity_time = "O(V + E)"
+            complexity_space = "O(V)"
         elif algo == "dijkstra":
             path = dijkstra(graph, start_node, end_node)
+            complexity_time = "O((V + E) log V)"
+            complexity_space = "O(V + E)"
         else:
             return jsonify({"error": "Invalid algorithm"}), 400
 
@@ -60,7 +66,9 @@ def route():
             "path_length": len(path),
             "runtime_seconds": round(t1 - t0, 6),
             "memory_mb": round(peak / (1024*1024), 3),
-            "path": path
+            "path": path,
+            "complexity_time": complexity_time,
+            "complexity_space": complexity_space
         })
     except Exception as e:
         return jsonify({"error": str(e)}), 500

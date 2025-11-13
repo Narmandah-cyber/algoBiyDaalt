@@ -22,23 +22,19 @@ def build_graph(shp_path=None):
         if not isinstance(geom, LineString):
             continue
 
-        # Extract attributes safely
         oneway = str(row.get("oneway", "no")).lower()
         maxspeed = row.get("maxspeed", 60)
         fclass = str(row.get("fclass", "")).lower()
         surface = str(row.get("surface", "")).lower()
 
-        # Validate and convert speed
         try:
             speed = float(maxspeed)
         except (ValueError, TypeError):
             speed = 60.0
 
-        # Avoid invalid or zero speed
         if speed <= 0:
             speed = 1.0
 
-        # Determine road type factor
         type_factor = 1.0
         if "motorway" in fclass:
             type_factor = 0.8
@@ -49,24 +45,20 @@ def build_graph(shp_path=None):
         elif "service" in fclass or "track" in fclass:
             type_factor = 1.5
 
-        # Surface adjustment
         if "gravel" in surface or "dirt" in surface:
             type_factor *= 1.3
 
-        # Avoid division by zero
         if type_factor == 0:
             type_factor = 1.0
 
-        # Build edges
         coords = list(geom.coords)
         for i in range(len(coords) - 1):
             start, end = tuple(coords[i]), tuple(coords[i + 1])
             dist_km = haversine(start, end)
 
-            # Calculate weight safely
             denominator = (speed / 60 / type_factor)
             if denominator == 0:
-                denominator = 1e-6  # tiny number to avoid division error
+                denominator = 1e-6
 
             weight = dist_km / denominator
 

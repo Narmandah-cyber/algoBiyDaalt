@@ -20,14 +20,22 @@ function requestRoute() {
     fetch(`http://127.0.0.1:5000/route?start=${start}&end=${end}&algo=${algo}`)
       .then(res => res.json())
       .then(data => {
-        if (data.path?.length) {
-          const coords = data.path.map(([x, y]) => [y, x]);
-          drawRoute(coords);
-          console.log(`${algo.toUpperCase()} Runtime: ${data.runtime_seconds}s, Memory: ${data.memory_mb}MB`);
-        } else {
-          alert("No path found!");
-        }
-      })
+  if (data.path?.length) {
+    const coords = data.path.map(([x, y]) => [y, x]);
+    drawRoute(coords);
+    document.getElementById("runtime").textContent =
+      `Runtime: ${data.runtime_seconds}s`;
+    document.getElementById("memory").textContent =
+      `Memory: ${data.memory_mb} MB`;
+    document.getElementById("complexity-time").textContent =
+      `Time Complexity: ${data.complexity_time}`;
+    document.getElementById("complexity-space").textContent =
+      `Space Complexity: ${data.complexity_space}`;
+  } else {
+    alert("No path found!");
+  }
+})
+
       .catch(() => alert("Error fetching route!"));
   }
 }
