@@ -1,4 +1,4 @@
-package org.example.pathfinding.model;
+package com.example.pathfinding.model;
 
 import java.util.Objects;
 
@@ -26,7 +26,8 @@ public class Node {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Node node)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
+        Node node = (Node) o;
         return Double.compare(node.lon, lon) == 0 &&
                 Double.compare(node.lat, lat) == 0;
     }
