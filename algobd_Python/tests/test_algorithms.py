@@ -8,8 +8,8 @@ C = (2.0, 0.0)
 D = (0.0, 1.0)
 
 test_graph = {
-    A: [(B, 1.0), (D, 2.0)],           # A → B (1 min), A → D (2 min)
-    B: [(A, 1.0), (C, 1.0), (D, 1.5)], # B → C (1 min), B → D (1.5 min)
+    A: [(B, 1.0), (D, 2.0)],
+    B: [(A, 1.0), (C, 1.0), (D, 1.5)],
     C: [(B, 1.0)],
     D: [(A, 2.0), (B, 1.5)]
 }
@@ -33,7 +33,7 @@ def test_dfs_finds_a_path():
     path = dfs_path(test_graph, A, C)
     assert path[0] == A
     assert path[-1] == C
-    assert len(path) >= 2   # at least one edge
+    assert len(path) >= 2
 
 
 def test_dfs_same_node():
@@ -48,8 +48,6 @@ def test_dfs_no_path():
 
 
 def test_dijkstra_fastest_path():
-    # A → B → C = 1 + 1 = 2 min
-    # A → D → B → C = 2 + 1.5 + 1 = 4.5 min → slower
     path = dijkstra(test_graph, A, C)
     assert path == [A, B, C], f"Dijkstra returned {path}"
 
